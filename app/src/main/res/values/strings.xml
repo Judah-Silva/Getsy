@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Getsy_v2</string>
+    <string name="main_log_in_button">Log in</string>
+    <string name="main_getsy_title">Getsy</string>
+    <string name="main_sign_up_button">Sign up</string>
+    <string name="child_log_in_button">Log in</string>
+    <string name="child_user_name_prompt">Enter Username</string>
+    <string name="child_password_prompt">Enter Password</string>
 </resources>

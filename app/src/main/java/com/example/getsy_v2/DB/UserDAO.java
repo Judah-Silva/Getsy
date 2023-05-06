@@ -1,5 +1,6 @@
 package com.example.getsy_v2.DB;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -9,6 +10,7 @@ import com.example.getsy_v2.User;
 
 import java.util.List;
 
+@Dao
 public interface UserDAO {
 
     @Insert

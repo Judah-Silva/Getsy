@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.getsy_v2.databinding.ActivityMainBinding;
 
@@ -14,12 +15,9 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
-
     Button mLogIn;
 
     Button mSignUp;
-
-    Button testButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

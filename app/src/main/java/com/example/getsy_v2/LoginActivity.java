@@ -35,9 +35,14 @@ public class LoginActivity extends AppCompatActivity {
         mLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                checkCredentials();
                 backToMain();
             }
         });
+    }
+
+    private void checkCredentials() {
+
     }
 
     private void backToMain() {

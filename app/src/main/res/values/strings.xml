@@ -6,4 +6,9 @@
     <string name="child_log_in_button">Log in</string>
     <string name="child_user_name_prompt">Enter Username</string>
     <string name="child_password_prompt">Enter Password</string>
+    <string name="landing_main_menu">Main Menu</string>
+    <string name="search_button">Search</string>
+    <string name="order_history_button">Order History</string>
+    <string name="admin_button">Admin</string>
+    <string name="user">USER</string>
 </resources>

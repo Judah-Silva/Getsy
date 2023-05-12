@@ -70,18 +70,18 @@ public class LoginActivity extends AppCompatActivity {
     private boolean checkCredentials() {
         mUser = UserDAO.getUserByUsername(mUsername);
         if (mUser == null) {
-            Toast.makeText(getApplicationContext(), "Incorrect username or password; returning to main activity", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Incorrect username or password; returning to main activity", Toast.LENGTH_LONG).show();
             return false;
         }
         if (!mUser.getPassword().equals(mPassword)) {
-            Toast.makeText(getApplicationContext(), "Incorrect username or password; returning to main activity", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Incorrect username or password; returning to main activity", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
     }
 
     private void getDatabase() {
-        UserDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DATABASE_NAME).build().UserDAO();
+        UserDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DATABASE_NAME).allowMainThreadQueries().build().UserDAO();
     }
 
     private void backToMain() {

@@ -82,7 +82,7 @@ public class LandingActivity extends AppCompatActivity {
     }
 
     private void getDatabase() {
-        UserDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DATABASE_NAME).build().UserDAO();
+        UserDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DATABASE_NAME).allowMainThreadQueries().build().UserDAO();
     }
 
     @Override

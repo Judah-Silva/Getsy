@@ -28,5 +28,7 @@ public interface UserDAO {
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE mUserId = :userId")
     User getUserById(int userId);
 
+    @Query(("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE mUsername = :userName"))
+    User getUserByUsername(String userName);
 
 }

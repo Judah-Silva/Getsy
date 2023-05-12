@@ -13,11 +13,11 @@ import com.example.getsy_v2.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    ActivityMainBinding binding;
+    private ActivityMainBinding binding;
 
-    Button mLogIn;
+    private Button mLogIn;
 
-    Button mSignUp;
+    private Button mSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

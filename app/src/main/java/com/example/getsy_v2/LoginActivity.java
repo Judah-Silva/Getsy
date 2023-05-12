@@ -1,10 +1,13 @@
 package com.example.getsy_v2;
 
+import static com.example.getsy_v2.MainActivity.USER_ID_KEY;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +20,8 @@ import com.example.getsy_v2.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static final String PREFERENCES_KEY = "com.example.getsy_v2.preferencesKey";
+
     private ActivityLoginBinding binding;
 
     private EditText mUsernameInput;
@@ -25,11 +30,15 @@ public class LoginActivity extends AppCompatActivity {
     private String mUsername;
     private String mPassword;
 
+    private int mUserId;
+
     private Button mLogIn;
 
     private UserDAO UserDAO;
 
     private User mUser;
+
+    private SharedPreferences mPreferences = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         getDatabase();
+
+        checkPreferences();
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -52,9 +63,33 @@ public class LoginActivity extends AppCompatActivity {
                 if (!checkCredentials()) {
                     backToMain();
                 }
+                putUserInPreferences();
                 forwardUntoLanding();
             }
         });
+    }
+
+    private void checkPreferences() {
+        if (mPreferences == null) {
+            getPrefs();
+        }
+
+        mUserId = mPreferences.getInt(USER_ID_KEY, -1);
+
+        if (mUserId != -1) {
+            forwardUntoLanding();
+        }
+    }
+
+    private void getPrefs() {
+        mPreferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
+    }
+
+    private void putUserInPreferences() {
+        if (mPreferences != null) {
+            SharedPreferences.Editor editor = mPreferences.edit();
+            editor.putInt(USER_ID_KEY, mUser.getUserId());
+        }
     }
 
     private void forwardUntoLanding() {
@@ -70,18 +105,18 @@ public class LoginActivity extends AppCompatActivity {
     private boolean checkCredentials() {
         mUser = UserDAO.getUserByUsername(mUsername);
         if (mUser == null) {
-            Toast.makeText(getApplicationContext(), "Incorrect username or password; returning to main activity", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Incorrect username or password; returning to main activity", Toast.LENGTH_LONG).show();
             return false;
         }
         if (!mUser.getPassword().equals(mPassword)) {
-            Toast.makeText(getApplicationContext(), "Incorrect username or password; returning to main activity", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Incorrect username or password; returning to main activity", Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
     }
 
     private void getDatabase() {
-        UserDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DATABASE_NAME).build().UserDAO();
+        UserDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DATABASE_NAME).allowMainThreadQueries().build().UserDAO();
     }
 
     private void backToMain() {

@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void forwardUntoLanding() {
-        Intent intent = LandingActivity.intentFactory(this);
+        Intent intent = LandingActivity.intentFactory(this, mUser.getUserId());
         startActivity(intent);
     }
 
@@ -70,11 +70,11 @@ public class LoginActivity extends AppCompatActivity {
     private boolean checkCredentials() {
         mUser = UserDAO.getUserByUsername(mUsername);
         if (mUser == null) {
-            Toast.makeText(this, "Incorrect username or password; returning to main activity", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Incorrect username or password; returning to main activity", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (!mUser.getPassword().equals(mPassword)) {
-            Toast.makeText(this, "Incorrect username or password; returning to main activity", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Incorrect username or password; returning to main activity", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

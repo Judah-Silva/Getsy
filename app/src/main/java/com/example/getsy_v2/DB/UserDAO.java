@@ -66,4 +66,6 @@ public interface UserDAO {
     @Query(" SELECT * FROM " + AppDatabase.PRODUCT_TABLE + " WHERE mProductId = :productId")
     Product getProductById(int productId);
 
+    @Query(" SELECT * FROM " + AppDatabase.PRODUCT_TABLE + " WHERE mName = :name")
+    Product getProductByName(String name);
 }

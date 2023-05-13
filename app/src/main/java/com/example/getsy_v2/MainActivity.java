@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         getDatabase();
 
+        checkProducts();
+
         checkForUser();
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -57,6 +59,20 @@ public class MainActivity extends AppCompatActivity {
                 signUp();
             }
         });
+    }
+
+    private void checkProducts() {
+        List<Product> productList = UserDAO.getAllProducts();
+        if (productList.size() <= 0) {
+            Product product1 = new Product(1, 66.0, "Vader's Lightsaber", "The lightsaber of the strongest force user");
+            Product product2 = new Product(1, 100.0, "Anakin's Lightsaber", "A lightsaber that was used to kill younglings");
+            Product product3 = new Product(5, 15.0, "Rorkid Bread", "Yummy bread made by the Ewoks");
+            Product product4 = new Product(10, 20.0, "StormTrooper Blaster", "Blaster with terrible aim");
+            Product product5 = new Product(20, 5.0, "Ice cream cone", "Mint Chocolate Chip");
+            Product product6 = new Product(5, 50.0, "Robe", "So that you can look like a jedi");
+            Product product7 = new Product(3, 30.0, "Bacta tank", "The lifeblood of the commandos");
+            UserDAO.insert(product1, product2, product3, product4, product5, product6, product7);
+        }
     }
 
     private void getDatabase() {

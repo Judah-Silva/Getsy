@@ -1,9 +1,12 @@
 package com.example.getsy_v2;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.getsy_v2.DB.AppDatabase;
 import com.example.getsy_v2.DB.UserDAO;
@@ -73,6 +77,10 @@ public class LandingActivity extends AppCompatActivity {
         }
     }
 
+    private void clearUserFromIntent() {
+        getIntent().putExtra(USER_ID_KEY, -1);
+    }
+
     private void getId() {
         mUser = UserDAO.getUserById(getIntent().getIntExtra(USER_ID_KEY, -1));
         if (mUser != null) {
@@ -99,6 +107,44 @@ public class LandingActivity extends AppCompatActivity {
             item.setTitle(mUser.getUsername());
         }
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.user_button) {
+            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+            alertBuilder.setMessage("Logout?");
+
+            alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    clearUserFromIntent();
+                    clearUserFromPreferences();
+                    mUserId = -1;
+                    backToMain();
+                }
+            });
+
+            alertBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                }
+            });
+
+            alertBuilder.setCancelable(true);
+
+            alertBuilder.create().show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void backToMain() {
+        Intent intent = MainActivity.intentFactory(getApplicationContext());
+        startActivity(intent);
+    }
+
+    private void clearUserFromPreferences() {
+        LoginActivity.putUserInPreferences(-1);
     }
 
     public static Intent intentFactory(Context context, int userId) {

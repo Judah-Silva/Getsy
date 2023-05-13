@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private User mUser;
 
-    private SharedPreferences mPreferences = null;
+    public static SharedPreferences mPreferences = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +62,10 @@ public class LoginActivity extends AppCompatActivity {
                 getDataFromDisplay();
                 if (!checkCredentials()) {
                     backToMain();
+                } else {
+                    putUserInPreferences(mUser.getUserId());
+                    forwardUntoLanding();
                 }
-                putUserInPreferences();
-                forwardUntoLanding();
             }
         });
     }
@@ -85,10 +86,10 @@ public class LoginActivity extends AppCompatActivity {
         mPreferences = this.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
     }
 
-    private void putUserInPreferences() {
+    public static void putUserInPreferences(int userId) {
         if (mPreferences != null) {
             SharedPreferences.Editor editor = mPreferences.edit();
-            editor.putInt(USER_ID_KEY, mUser.getUserId());
+            editor.putInt(USER_ID_KEY, userId);
         }
     }
 
@@ -105,11 +106,11 @@ public class LoginActivity extends AppCompatActivity {
     private boolean checkCredentials() {
         mUser = UserDAO.getUserByUsername(mUsername);
         if (mUser == null) {
-            Toast.makeText(getApplicationContext(), "Incorrect username or password; returning to main activity", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Incorrect username or password; returning to main activity", Toast.LENGTH_SHORT).show();
             return false;
         }
         if (!mUser.getPassword().equals(mPassword)) {
-            Toast.makeText(getApplicationContext(), "Incorrect username or password; returning to main activity", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Incorrect username or password; returning to main activity", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

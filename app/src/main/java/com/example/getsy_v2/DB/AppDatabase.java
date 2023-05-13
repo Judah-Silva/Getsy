@@ -10,7 +10,7 @@ import com.example.getsy_v2.Product;
 import com.example.getsy_v2.ShoppingCart;
 import com.example.getsy_v2.User;
 
-@Database(entities = {User.class, ShoppingCart.class, Product.class}, version = 2)
+@Database(entities = {User.class, ShoppingCart.class, Product.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
     public static final String DATABASE_NAME = "Getsy.db";
     public static final String USER_TABLE = "user_table";

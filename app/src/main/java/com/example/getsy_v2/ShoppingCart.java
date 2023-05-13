@@ -19,9 +19,12 @@ public class ShoppingCart {
 
     private int mCartCount;
 
-    public ShoppingCart(int userId, int cartCount) {
+    private int mProductId;
+
+    public ShoppingCart(int userId, int cartCount, int productId) {
         mUserId = userId;
         mCartCount = cartCount;
+        mProductId = productId;
     }
 
     public int getCartId() {
@@ -46,6 +49,14 @@ public class ShoppingCart {
 
     public void setCartCount(int cartCount) {
         mCartCount = cartCount;
+    }
+
+    public int getProductId() {
+        return mProductId;
+    }
+
+    public void setProductId(int productId) {
+        mProductId = productId;
     }
 
     @Override

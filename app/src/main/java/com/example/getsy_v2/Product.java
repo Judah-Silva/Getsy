@@ -14,11 +14,13 @@ public class Product {
     private int mQuantity;
     private double mPrice;
 
+    private String mName;
     private String mDescription;
 
-    public Product(int quantity, double price, String description) {
+    public Product(int quantity, double price, String name, String description) {
         mQuantity = quantity;
         mPrice = price;
+        mName = name;
         mDescription = description;
     }
 
@@ -44,6 +46,14 @@ public class Product {
 
     public void setPrice(double price) {
         mPrice = price;
+    }
+
+    public String getName() {
+        return mName;
+    }
+
+    public void setName(String name) {
+        mName = name;
     }
 
     public String getDescription() {

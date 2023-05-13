@@ -16,4 +16,10 @@
     <string name="sign_up_password_input">Enter Password</string>
     <string name="sign_up_button">Sign Up</string>
     <string name="sign_up_confirm_password_input">Confirm Password</string>
+    <string name="search_for_items_title">Search for Items</string>
+    <string name="search_input">Search</string>
+    <string name="searchButton_searchActivity">Search</string>
+    <string name="buy_button">Buy</string>
+    <string name="items_info_example">Price: $0\nIn Stock: 0\nDetails:</string>
+    <string name="item_name_example">Example Item</string>
 </resources>

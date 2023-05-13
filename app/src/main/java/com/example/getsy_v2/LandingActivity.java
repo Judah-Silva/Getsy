@@ -56,7 +56,7 @@ public class LandingActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //make search activity first
+                toSearch();
             }
         });
 
@@ -67,6 +67,11 @@ public class LandingActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void toSearch() {
+        Intent intent = SearchActivity.intentFactory(getApplicationContext(), mUserId);
+        startActivity(intent);
     }
 
     private void checkAdmin() {

@@ -11,4 +11,9 @@
     <string name="order_history_button">Order History</string>
     <string name="admin_button">Admin</string>
     <string name="user">USER</string>
+    <string name="sign_up_title">Sign Up</string>
+    <string name="sign_up_usernameInput">Enter Username</string>
+    <string name="sign_up_password_input">Enter Password</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="sign_up_confirm_password_input">Confirm Password</string>
 </resources>

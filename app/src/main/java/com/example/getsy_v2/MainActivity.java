@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private int mUserId;
 
-    private UserDAO mUserDAO;
+    private UserDAO UserDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,25 +51,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        mSignUp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // Call the intent factory of the sign up activity
-//            }
-//        });
+        mSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signUp();
+            }
+        });
     }
 
     private void getDatabase() {
-        mUserDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DATABASE_NAME).allowMainThreadQueries().build().UserDAO();
+        UserDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DATABASE_NAME).allowMainThreadQueries().build().UserDAO();
     }
 
     private void checkForUser() {
         //do we have any users?
-        List<User> users = mUserDAO.getAllUsers();
+        List<User> users = UserDAO.getAllUsers();
         if (users.size() <= 0) {
             User testUser = new User("testUser", "password", false);
             User adminUser = new User("admin1", "password", true);
-            mUserDAO.insert(testUser, adminUser);
+            UserDAO.insert(testUser, adminUser);
         }
     }
 
@@ -84,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void signUp() {
-
+        Intent intent = SignUpActivity.intentFactory(getApplicationContext());
+        startActivity(intent);
     }
 
     public static Intent intentFactory(Context packageContext) {

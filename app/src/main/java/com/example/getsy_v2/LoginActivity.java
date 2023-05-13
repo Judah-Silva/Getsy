@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void forwardUntoLanding() {
-        Intent intent = LandingActivity.intentFactory(this, mUser.getUserId());
+        Intent intent = LandingActivity.intentFactory(getApplicationContext(), mUser.getUserId());
         startActivity(intent);
     }
 
